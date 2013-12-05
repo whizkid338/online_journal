@@ -84,7 +84,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = '/home/ubuntu/online_journal/static/'
-MEDIA_URL = '/static/'
+# MEDIA_URL = '/static/'
 
 # Template Location
 TEMPLATE_DIRS = (
