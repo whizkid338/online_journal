@@ -1,3 +1,4 @@
+
 """
 Django settings for online_journal project.
 
@@ -60,11 +61,11 @@ WSGI_APPLICATION = 'online_journal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': ,
-	'USER': ,
-	'PASSWORD': ,
-	'HOST': localhost,
-	'PORT': 3306,
+        'NAME': '',
+	'USER': '',
+	'PASSWORD':'' ,
+	'HOST': '127.0.0.1',
+	'PORT': '3306',
     }
 }
 
