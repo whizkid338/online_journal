@@ -87,9 +87,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/online_journal/static/'
-STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'static'),
-)
+#STATICFILES_DIRS = (
+#	os.path.join(BASE_DIR, 'static'),
+#)
 
 # MEDIA_ROOT = '/home/ubuntu/online_journal/static/'
 
