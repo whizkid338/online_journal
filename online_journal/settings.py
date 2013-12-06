@@ -61,9 +61,9 @@ WSGI_APPLICATION = 'online_journal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
-	'USER': '',
-	'PASSWORD':'' ,
+        'NAME': 'online_journal',
+	'USER': 'online_journal',
+	'PASSWORD':'ntcztZDYrdX967Ah' ,
 	'HOST': '127.0.0.1',
 	'PORT': '3306',
     }
@@ -86,9 +86,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
-
-MEDIA_ROOT = '/home/ubuntu/online_journal/static/'
+=======
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = '/online_journal/static/'
+# STATICFILES_DIRS = (
+# 	os.path.join(BASE_DIR, 'static'),
+# )
 
 # Template Location
 TEMPLATE_DIRS = (
