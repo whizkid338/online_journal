@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel=stylesheet" href="style.css" />
+  {% load staticfiles %}
+  <link rel=stylesheet" href="{% static "style.css" %}" />
   <title>{% block title %}OJ{% endblock %}</title>
 </head>
 
 <body>
   <div id="navbar">
     {% block navbar %}
-    <a id="logo" ref="/entry/"><img src="logo.png"></a>
+    <a id="logo" ref="/entry/"><img src="{% static "logo.png" %}"/></a>
     <ul id="navigation">
-      <li><a href="/entry/"><p>Entry<p></a></li>
+      <li><a href="/entry/"><p>Entry</p></a></li>
       <li><a href="/view/"><p>View</p></a></li>
       <li><a href="/find/"><p>Find</p></a></li>
     </ul>
     <ul id="login">
-      <li id="username"><a href="#"><p>{% block username %}</p></a></li>
+      <li id="username"><a href="#"><p>{{ username }}</p></a></li>
       <li><a class="ojbutton" href="#"><p>Sign In</p></a></li>
     </ul>
     {% endblock %}
