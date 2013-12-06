@@ -2,6 +2,7 @@
 
   #navbar {
       height: 60px;
+      width: 100%;
       background-color: #FACA2A;
       padding: 0px;
   }
@@ -48,6 +49,19 @@
 
   #login {
       float: right;
+  }
+
+  #content {
+      height: 800;
+      width: 100%;
+      padding: 0px;
+  }
+
+  #footer {
+      height: 100;
+      width: 100%;
+      background-color: #FACA2A;
+      padding: 0px;
   }
 
 </style>
