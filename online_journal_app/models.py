@@ -19,7 +19,7 @@ class Entry(models.Model):
 
 class Tag(models.Model):
 	def __unicode__(self):
-		return self.tag_name
+		return self.name
 
 	entry = models.ForeignKey(Entry)
-	tag_name = models.CharField(max_length=50)
+	name = models.CharField(max_length=50)
