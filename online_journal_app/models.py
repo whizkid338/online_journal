@@ -16,6 +16,7 @@ class Entry(models.Model):
 	title = models.CharField(max_length=255)
 	content = models.TextField()
 	pub_date = models.DateTimeField('Date of Entry')
+	last_edit = models.DateTimeField('Most Recent Edit')
 
 class Tag(models.Model):
 	def __unicode__(self):
