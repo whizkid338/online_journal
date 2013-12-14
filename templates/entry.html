@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}OJ Entry{% endblock %}
+
+{% block mainBlock %}
+        <div class="page-header">
+            <h1 class="text-center">Welcome to OJ!</h1>
+            <p class="lead text-center">OJ is your Online Journal solution to create, view, find, and share journal entries.
+                <br/>Simply sign in above to begin writing in your journal!
+            </p>
+        </div>
+        <form class="form-signin" role="form">
+            <div class="row">
+                <div class="col-md-3">
+                   {{ editing }}
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control text-center" placeholder="Title">
+                        {% autoescape on %}{{ title }}{% endautoescape %}
+                    </input>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control text-center" id="datepicker" placeholder="Date">
+                    </input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-centered">
+                    <input type="text" class="form-control text-center" placeholder="Group">
+                        {% autoescape on %}{{ group }}{% endautoescape %}
+                    </input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-centered">
+                    <input type="text" class="form-control" placeholder="Entry" required>
+                        {% autoescape on %}{{ entry }}{% endautoescape %}
+                    </input>
+                </div>
+            </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        </form>
+{% endblock %}
+
+{% block footer %}
+<p class="text-muted">This is the ENTRY page</p>
+{% endblock %}
