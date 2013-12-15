@@ -54,11 +54,16 @@ def getTagList(author_id):
 def updateEntry(author_id, entry_id = None, title = None, content = None, pub_date = None):
 	_entry = Entry()
 	_author = getAuthor(author_id)
-	if not _author.id:
+	if not _author:
 		return 0
 
 	if entry_id:
-		_entry = Entry.objects.get(id = entry_id)
+
+		try:
+			_entry = Entry.objects.get(id = entry_id)
+		except:
+			return 0
+
 		# Check for invalid author; do not allow anyone other than the original author to edit an Entry
 		if _entry.author != _author:
 			return 0
