@@ -15,6 +15,9 @@ def base(request):
 def entry(request):
     return render_to_response('entry.html')
 
+def view(request):
+    return render_to_response('view.html')
+
 def find(request):
     # entrySearch(request.authorID)
     return render_to_response('find.html')
