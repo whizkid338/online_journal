@@ -38,7 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'online_journal_app',
-    'markdown_deux'
+    'markdown_deux',
+    'online_journal',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,10 +63,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'online_journal',
-	'USER': 'online_journal',
-	'PASSWORD':'ntcztZDYrdX967Ah' ,
-	'HOST': '127.0.0.1',
-	'PORT': '3306',
+    	'USER': 'online_journal',
+    	'PASSWORD':'ntcztZDYrdX967Ah' ,
+    	'HOST': '127.0.0.1',
+    	'PORT': '3306',
     }
 }
 
