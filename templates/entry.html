@@ -11,10 +11,8 @@
         </div>
         <form class="form-signin" role="form">
             <div class="row">
-                <div class="col-md-3">
-                   {{ editing }}
-                </div>
-                <div class="col-md-6">
+                {{ editing }}
+                <div class="col-md-6 col-md-offset-3">
                     <input type="text" class="form-control text-center" placeholder="Title">
                         {% autoescape on %}{{ title }}{% endautoescape %}
                     </input>
