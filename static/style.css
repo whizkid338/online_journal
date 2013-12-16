@@ -1,4 +1,3 @@
-<style type="text/css">
 
   #navbar {
       height: 60px;
@@ -9,6 +8,7 @@
 
   #navbar ul {
       list-style-type: none;
+    background-color: PURPLE;
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -16,10 +16,6 @@
 
   #navbar li {
       float: left;
-  }
-
-  #navbar p, #navbar img {
-      vertical-align: middle;
   }
 
   #navbar a:link, #navbar a:visited {
@@ -32,7 +28,7 @@
       background-color: #FACA2A;
       text-align: center;
       text-decoration: none;
-      test-transform: uppercase;
+      line-height: 60px;
   }
 
   #navbar a:hover, #navbar a:active {
@@ -45,22 +41,29 @@
 
   #navigation {
       float: left;
+        background-color: BLACK;
+        padding: 0px;
   }
 
   #login {
+      background-color: RED;
       float: right;
   }
 
   #content {
-      height: 800;
+      height: 400px;
       width: 100%;
       padding: 0px;
+      float: left;
   }
 
   #footer {
-      height: 100;
+      height: 100px;
       width: 100%;
       background-color: #FACA2A;
       padding: 0px;
+      float: left;
+    text-align: center;
+    line-height: 100px;
   }
-</style>
+
