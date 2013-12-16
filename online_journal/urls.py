@@ -17,4 +17,4 @@ urlpatterns = patterns('',
     url(r'^entry', 'online_journal_app.views.entry'),
     url(r'^view', 'online_journal_app.views.view'),
     url(r'^find', 'online_journal_app.views.find'),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)
