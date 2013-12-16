@@ -10,3 +10,9 @@ def index(request):
 
 def base(request):
     return render_to_response('base.html')
+
+def entry(request):
+    return render_to_response('entry.html')
+
+def find(request):
+    return render_to_response('find.html')
