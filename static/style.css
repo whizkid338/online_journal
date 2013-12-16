@@ -1,69 +1,83 @@
 
-  #navbar {
-      height: 60px;
-      width: 100%;
-      background-color: #FACA2A;
-      padding: 0px;
-  }
+@import url('http://getbootstrap.com/dist/css/bootstrap.css');
 
-  #navbar ul {
-      list-style-type: none;
-    background-color: PURPLE;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-  }
+/* Sticky footer styles
+-------------------------------------------------- */
 
-  #navbar li {
-      float: left;
-  }
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
 
-  #navbar a:link, #navbar a:visited {
-      display: block;
-      width: 100px;
-      height: 60px;
-      padding: 0px;
-      font-weight: bold;
-      color: #FFF;
-      background-color: #FACA2A;
-      text-align: center;
-      text-decoration: none;
-      line-height: 60px;
-  }
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
 
-  #navbar a:hover, #navbar a:active {
-      background-color: #DAAA0A;
-  }
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
 
-  #logo {
-      float: left;
-  }
 
-  #navigation {
-      float: left;
-        background-color: BLACK;
-        padding: 0px;
-  }
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
 
-  #login {
-      background-color: RED;
-      float: right;
-  }
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
 
-  #content {
-      height: 400px;
-      width: 100%;
-      padding: 0px;
-      float: left;
-  }
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
-  #footer {
-      height: 100px;
-      width: 100%;
-      background-color: #FACA2A;
-      padding: 0px;
-      float: left;
-    text-align: center;
-    line-height: 100px;
-  }
+code {
+  font-size: 80%;
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+h4 {
+  margin-top: 25px;
+}
+.row {
+  margin-bottom: 20px;
+}
+.row .row {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+[class*="col-"] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  background-color: rgba(86,61,124,.15);
+  border: 1px solid rgba(86,61,124,.2);
+}
+
+hr {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
 
