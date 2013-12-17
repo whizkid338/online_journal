@@ -83,6 +83,40 @@ def updateEntry(author_id, entry_id = None, title = None, content = None, pub_da
 	_entry.save()
 	return _entry.id
 
+'''updateAuthor will edit (if author_id is supplied) or create (if not) an author,
+	set the properties to the parameters supplied and update the database.
+	When done, updateAuthor will return the id of the newly created or edited author.'''
+def updateAuthor(author_id = None, auth_identifier = None, name = None):
+	_author = Author()
+	if author_id:
+		_author = Author.objects.get(id = author_id)
+	else:
+		if not (auth_identifier and name):
+			return 0
+	if auth_identifier:
+		_author.auth_identifier = auth_identifier
+	if name:
+		_author.name = name
+	_author.save()
+	return _author.id
+
+'''updateTag will edit (if tag_id is supplied) or create (if not) an tag,
+	set the properties to the parameters supplied and update the database.
+	When done, updateTag will return the id of the newly created or edited tag.'''
+def updateTag(tag_id = None, name = None, entry = None):
+	_tag = Tag()
+	if tag_id:
+		_tag = Tag.objects.get(id = tag_id)
+	else:
+		if not (name and entry):
+			return 0
+	if name:
+		_tag.name = name
+	if entry:
+		_tag.entry = entry
+	_tag.save()
+	return _tag.id
+
 '''getEntry will return the entry by id. If an author is specified, getEntry will verify that the author matches;
 	otherwise, it will return None.'''
 def getEntry(entry_id, author_id = None):
@@ -100,3 +134,28 @@ def getAuthor(identifier):
 		return Author.objects.get(auth_identifier = identifier)
 	except:
 		return None
+
+'''deleteAuthor deletes an author and all child objects. In the future, these deletes may be replaced with soft delete
+	flags instead- for now, however, this will be a permanent delete for simplicity's sake.
+	Unlike my other delete functions, this will use the standard author identifier, rather than the id; this way,
+	I can try for consistency across my functions and avoid requiring developers to find an author id that they would
+	otherwise not need.'''
+def deleteAuthor(identifier):
+	_author = getAuthor(identifier)
+	for _entry in _author.entry_set.all():
+		for _tag in _entry.tag_set.all():
+			_tag.delete()
+		_entry.delete()
+	_author.delete()
+
+'''deleteEntry will delete an Entry and all child objects.'''
+def deleteEntry(entry_id):
+	_entry = Entry.objects.get(id = entry_id)
+	for _tag in _entry.tag_set.all():
+		_tag.delete()
+	_entry.delete()
+
+'''deleteTag will delete a Tag.'''
+def deleteTag(tag_id):
+	_tag = Tag.objects.get(id = tag_id)
+	_tag.delete()
