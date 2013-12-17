@@ -1,5 +1,6 @@
 from online_journal_app.models import *
 from django.utils import timezone
+import re
 
 # def getEntriesByDate(author_id, date):
 # 	auth = getAuthor(author_id)
@@ -14,8 +15,8 @@ from django.utils import timezone
 # def getEntryTags(entry_id):
 # 	return list(set([t.name for t in Entry.objects.get(id = entry_id).tag_set.all()]))
 
-'''entrySearch will return all entries filtered by any supplied parameters.'''
-def entrySearch(author_id = None, datestart = None, dateend = None, taglist = None):
+'''entryFilter will return all entries filtered by any supplied parameters.'''
+def entryFilter(author_id = None, datestart = None, dateend = None, taglist = None):
 	foundEntries = Entry.objects.all()
 	if author_id:
 		_author = getAuthor(author_id)
@@ -29,6 +30,29 @@ def entrySearch(author_id = None, datestart = None, dateend = None, taglist = No
 	if taglist:
 		foundEntries = [entry for entry in foundEntries if set(taglist).issubset(set([tag.name for tag in entry.tag_set.all()]))]
 	return sorted(foundEntries, key = lambda x: x.pub_date)
+
+'''entrySearch will search through the text relevant to each Entry and return a list of results
+sorted by relevance.'''
+def entrySearch(searchString):
+	results = [[e, 0] for e in Entry.objects.all()]
+	searches = searchString.split()
+	for entscr in results:
+		entscr[1] = score(entscr[0], searches)
+	results = sorted(results, key=lambda es: -es[1])
+	return [entry[0] for entry in results if entry[1] > 0]
+
+'''score will assign a score to a given Entry based on the list of search strings'''
+def score(entry, searches):
+	score = 0
+	entryText = [entry.content, entry.title, entry.author.name] + [t.name for t in entry.tag_set.all()]
+	for search in searches:
+		tempScore = 1000
+		p = re.compile(search, re.IGNORECASE)
+		for s in entryText:
+			tempScore += len(p.findall(s))
+		if tempScore > 1000:
+			score += tempScore
+	return score
 
 '''getTagList returns a list(strings) of distinct tag names'''
 def getTagList(author_id):
