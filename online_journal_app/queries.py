@@ -36,10 +36,10 @@ def getTagList(author_id):
 	if not _author:
 		return []
 	entries = _author.entry_set.all()
-	tags = []
+	tags = set([])
 	for entry in entries:
-		tags = list(set(tags) | set([t.name for t in entry.tag_set.all()]))
-	return tags
+		tags = set(tags) | set([t.name for t in entry.tag_set.all()])
+	return list(tags)
 
 '''updateEntry will edit (if entry_id is supplied) or create (if not) an entry,
 	set the properties to the parameters supplied and update the database.
