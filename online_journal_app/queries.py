@@ -17,23 +17,18 @@ from django.utils import timezone
 '''entrySearch will return all entries filtered by any supplied parameters.'''
 def entrySearch(author_id = None, datestart = None, dateend = None, taglist = None):
 	foundEntries = Entry.objects.all()
-
 	if author_id:
 		_author = getAuthor(author_id)
 		if not _author:
 			return []
 		foundEntries = [entry for entry in foundEntries if entry.author == _author]
-
 	if datestart:
 		foundEntries = [entry for entry in foundEntries if entry.pub_date > datestart]
-
 	if dateend:
 		foundEntries = [entry for entry in foundEntries if entry.pub_date < dateend]
-
 	if taglist:
 		foundEntries = [entry for entry in foundEntries if set(taglist).issubset(set([tag.name for tag in entry.tag_set.all()]))]
-
-	return foundEntries
+	return sorted(foundEntries, key = lambda x: x.pub_date)
 
 '''getTagList returns a list(strings) of distinct tag names'''
 def getTagList(author_id):
@@ -42,10 +37,8 @@ def getTagList(author_id):
 		return []
 	entries = _author.entry_set.all()
 	tags = []
-
 	for entry in entries:
 		tags = list(set(tags) | set([t.name for t in entry.tag_set.all()]))
-
 	return tags
 
 '''updateEntry will edit (if entry_id is supplied) or create (if not) an entry,
@@ -56,30 +49,23 @@ def updateEntry(author_id, entry_id = None, title = None, content = None, pub_da
 	_author = getAuthor(author_id)
 	if not _author:
 		return 0
-
 	if entry_id:
-
 		try:
 			_entry = Entry.objects.get(id = entry_id)
 		except:
 			return 0
-
 		# Check for invalid author; do not allow anyone other than the original author to edit an Entry
 		if _entry.author != _author:
 			return 0
 	else:
 		_entry.author = _author
 		_entry.pub_date = timezone.now()
-
 	if title:
 		_entry.title = title
-
 	if content:
 		_entry.content = content
-
 	if pub_date:
 		_entry.pub_date = pub_date
-
 	_entry.save()
 	return _entry.id
 
