@@ -10,14 +10,22 @@ def index(request):
     return render_to_response('index.html')
 
 def base(request):
-    return render_to_response('base.html')
+    username = "Sign in"
+    # process username here from query
+    return render_to_response('base.html', {'username': username})
 
 def entry(request):
-    return render_to_response('entry.html')
+    username = "Sign in"
+    # process username here from query
+    return render_to_response('entry.html', {'username': username})
 
 def view(request):
-    return render_to_response('view.html')
+    username = "Sign in"
+    # process username here from query
+    return render_to_response('view.html', {'username': username})
 
 def find(request):
+    username = "Sign in"
+    # process username here from query
     # entrySearch(request.authorID)
-    return render_to_response('find.html')
+    return render_to_response('find.html', {'username': username})
