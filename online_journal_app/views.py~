@@ -3,31 +3,6 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from online_journal_app.queries import *
 
-from online_journal_app.models import Author, Entry, Tag
-from rest_framework import viewsets
-from online_journal_app.serializers import AuthorSerializer, EntrySerializer, TagSerializer
-
-class AuthorViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = Author.objects.all()
-    serializer_class = AuthorSerializer
-
-class EntryViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Entry.objects.all()
-    serializer_class = EntrySerializer
-
-class TagViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
-
 
 # Create your views here.
 
