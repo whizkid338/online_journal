@@ -28,4 +28,4 @@ urlpatterns = patterns('',
     url(r'^view', 'online_journal_app.views.view'),
     url(r'^find', 'online_journal_app.views.find'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) + static('/' + settings.STATIC_URL, document_root=settings.STATIC_ROOT)
