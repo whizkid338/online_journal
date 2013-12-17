@@ -12,13 +12,18 @@
                 </button>
             </div>
             <div class="col-md-10">
-                <h2>{{ title }}</h2>
-                <h3>{{ date }}</h3>
-                <br/>
-                <p>{{ content }}</p>
-		<br/>
-		<p>{{ tags }}</p>
-		<p>{{ lastEdited }}</p>
+                <p>Body content goes here. Isn't it great?</p>
+                <ul>
+                    <li>
+                        <p>This is a list of entries</p>
+                    </li>
+                    {% for entry in entries %}
+                    <li>
+                        <p>{{entry.title}}</p>
+                        <p>{{entry.content}}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
             <div class="col-md-1">
                 <button type="button" class="btn btn-default btn-lg">
