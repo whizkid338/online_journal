@@ -46,8 +46,9 @@ def entry(request):
 
 def view(request):
     username = "Sign in"
+    entry = entryFilter()
     # process username here from query
-    return render_to_response('view.html', {'username': username})
+    return render_to_response('view.html', {'username': username, 'entries': entry})
 
 def find(request):
     username = "Sign in"
