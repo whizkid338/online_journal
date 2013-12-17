@@ -95,7 +95,7 @@ STATICFILES_DIRS = (
 
 # Template Location
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, "templates") 
+    os.path.join(BASE_DIR, "templates"),
 )
 
 REST_FRAMEWORK = {
