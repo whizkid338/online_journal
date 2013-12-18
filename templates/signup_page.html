@@ -4,9 +4,24 @@
 
 {% block mainBlock %}
 
-<form action="createUser.html" method="post">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
+<form role="form" action="createUser.html" method="post">{% csrf_token %}
+	<div class="form-group">
+		<label for="inputName">Name</label>
+		<input type="text" class="form-control" name="name"><br>
+	</div>
+	<div class="form-group">
+		<label for="inputUsername">Username</label>
+		<input type="text" class="form-control" name="username"><br>
+	</div>
+	<div class="form-group">
+		<label for="inputPassword">Password</label>
+		<input type="password" class="form-control" name="password1"><br>
+	</div>
+	<div class="form-group">
+		<label for="inputConfirmPassword">Confirm Password</label>
+		<input type="password" class="form-control" name="password2"><br>
+	</div>
+	<button type="submit" class="btn btn-default">Submit</button>
 </form>
 
 {% endblock %}

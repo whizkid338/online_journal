@@ -145,6 +145,7 @@ def signup_page(request):
     return render(request, 'signup_page.html', {'form':form})
 
 def createUser(request):
+    name = request.POST['name']
     username = request.POST['username']
     password1 = request.POST['password1']
     password2 = request.POST['password2']
@@ -163,7 +164,7 @@ def createUser(request):
     user.set_password(password1)
     user.save()
 
-    updateAuthor(None, username, username)
+    updateAuthor(None, username, name)
     
     return redirect("entry.html")
 #    return HttpResponse("Congrats %s, you are now in our database" % username)
