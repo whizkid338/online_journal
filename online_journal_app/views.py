@@ -163,7 +163,10 @@ def createUser(request):
     user.set_password(password1)
     user.save()
 
-    return HttpResponse("Congrats %s, you are now in our database" % username)
+    updateAuthor(None, username, username)
+    
+    return redirect("entry.html")
+#    return HttpResponse("Congrats %s, you are now in our database" % username)
 
 def logout_view(request):
     logout(request)
