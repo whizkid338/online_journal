@@ -3,22 +3,18 @@
 <head>
   {% load staticfiles %}
   <title>{% block title %}OJ{% endblock %}</title>
-  <link rel="stylesheet" href="{% static "css/style.css" %}" />
-  <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-  <script src="{% static "js/bootstrap.js" %}"></script>
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
   <script>
   $(function() {
     $( "#datepicker" ).datepicker({
       changeMonth: true,
       changeYear: true
     });
-  });
-
-  $(document).ready(function() {
-    $('.dropdown-toggle').dropdown();
   });
   </script>
 
@@ -46,20 +42,20 @@
                       </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-		      <div class="dropdown">
-			  <li>
-			      <a id="dLabel" role="button" data-toggle="dropdown" data-target="#">{{ user.username }}<span class="caret"></span></a>
-			  </li>
-			  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			      <li>
-				  <form class="form-signin" role="form">
-				      <input type="text" class="form-control text-center" placeholder="Username"></input>
-				      <input type="text" class="form-control text-center" placeholder="Password"></input>
-				      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
-				    </form>
-		      </li> 
-			  </ul>
-		      </div>
+                      <li class="dropdown">
+                          <a id="dLabel" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                            {{ user.username }}<span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li>
+                              <form class="form-signin" role="form">
+                                  <input type="text" class="form-control text-center" placeholder="Username"></input>
+                                  <input type="text" class="form-control text-center" placeholder="Password"></input>
+                                  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+                              </form>
+                            </li> 
+                          </ul>
+                      </li>
                   </ul>
               </div>
           </div>
