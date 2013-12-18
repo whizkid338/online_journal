@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils.dateparse import *
+from django.views.decorators.csrf import *
 from online_journal_app.queries import *
 from django.http import HttpResponse
 
 from online_journal_app.models import Author, Entry, Tag
+from online_journal_app.forms import *
 from rest_framework import viewsets
 from online_journal_app.serializers import AuthorSerializer, EntrySerializer, TagSerializer
 
@@ -59,6 +62,20 @@ def view(request):
     entry = entryFilter()
     # process username here from query
     return render_to_response('view.html', {'username': username, 'entries': entry}, RequestContext(request))
+
+def submitEntry(request):
+	entryId = 0
+	if request.method == "POST":
+		form = EntryForm(request.POST)
+		if form.is_valid():
+				title = form.cleaned_data['title']
+				pub_date = form.cleaned_data['pub_date']
+				pub_date = parse_datetime(pub_date)
+				content = form.cleaned_data['content']
+				entryId = updateEntry(author_id=1, title=title, content=content, pub_date=pub_date)
+	else:
+		form = EntryForm()
+	return render_to_response('view.html', form, entryId)
 
 def find(request):
     username = "Sign in"
