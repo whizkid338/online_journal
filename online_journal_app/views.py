@@ -82,6 +82,7 @@ def submitEntry(request):
 
 def find(request):
     results = []
+    tags = []
     if request.method == "POST":
         form = FindForm(request.POST)
         if form.is_valid():
@@ -90,9 +91,10 @@ def find(request):
             dateend = form.cleaned_data['dateend']
             taglist = [form.cleaned_data['tag']]
             results = entryFilter(author, datestart, dateend, taglist)
+            tags = getTagList(author)
     # process username here from query
     # entrySearch(request.authorID)
-    return render_to_response('find.html', {'results': results}, RequestContext(request))
+    return render_to_response('find.html', {'results': results, 'tags': tags}, RequestContext(request))
 
 def login_page(request):
     form = AuthenticationForm
