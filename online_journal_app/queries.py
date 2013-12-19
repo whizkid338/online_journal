@@ -31,6 +31,15 @@ def entryFilter(author_id = None, datestart = None, dateend = None, taglist = No
 		foundEntries = [entry for entry in foundEntries if set(taglist).issubset(set([tag.name for tag in entry.tag_set.all()]))]
 	return sorted(foundEntries, key = lambda x: x.pub_date)
 
+'''latestEntry will return the latest entry id from the user (*hint* author_id = username)
+	if the user does not have any entries, -1 will be returned '''
+def latestEntry(username):
+	entries = entryFilter(author_id = username)
+	if entries:
+		return entries[-1].id
+
+	return -1
+
 '''entrySearch will search through the text relevant to each Entry and return a list of results
 sorted by relevance.'''
 def entrySearch( checkName = None ): #searchString, author_id = None):

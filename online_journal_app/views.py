@@ -17,6 +17,8 @@ from django.contrib.auth.forms import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+import datetime
+
 class AuthorViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -59,31 +61,46 @@ def entry(request):
     # process username here from query
     return render_to_response('entry.html', {'username': username}, RequestContext(request))
 
+''' creates an html page with an entry in it. 
+    if the entryId is provided, it creates a view of that entry
+    if the entryId is -1 (not provided), then the view looks for the
+        latestEntry for that user. '''
 @login_required
 def view(request, entryId=-1):
-    entry = getEntry(entryId)
+    if entryId == -1:
+        username = request.user.username
+        entryId = latestEntry(username)
+
+    entry = Entry()
+    if entryId == -1:
+        entry.title = "No Journal Entries Yet!"
+        entry.pub_date = datetime.datetime.now()
+        entry.content = "You need to create an entry before you can view one"
+    else:
+        entry = getEntry(entryId)
     # process username here from query
     return render_to_response('view.html', {'entry': entry}, RequestContext(request))
 
 @login_required
 def prevEntry(request):
-	entryId = request.POST['entryId']
-	entries = entryFilter(author_id=1)
-	for i in range(len(entries)):
-		if entries[i].id == long(entryId):
-			# only get previous entry if you aren't at the oldest already
-			index = 0
-			if i > 0:
-				index = i-1
-			entryId = entries[index].id
-			return view(request, entryId)
+    entryId = request.POST['entryId']
+    print(entryId)
+    entries = entryFilter(author_id=request.user.username)
+    for i in range(len(entries)):
+    	if entries[i].id == long(entryId):
+    		# only get previous entry if you aren't at the oldest already
+    		index = 0
+    		if i > 0:
+    			index = i-1
+    		entryId = entries[index].id
+    		return view(request, entryId)
     # process username here from query
-	return view(request, entryId)
+    return view(request, entryId)
 
 @login_required
 def nextEntry(request):
 	entryId = request.POST['entryId']
-	entries = entryFilter(author_id=1)
+	entries = entryFilter(author_id=request.user.username)
 	# we do not test the last entry, if it is the last we keep the last 
 	for i in range(len(entries)-1):
 		if entries[i].id == long(entryId):
@@ -105,7 +122,7 @@ def submitEntry(request):
 			pub_date = parse(pub_date)
 	if 'content' in request.POST and request.POST['content']:
 			content = request.POST['content']
-	entryId = updateEntry(author_id=1, title=title, content=content, pub_date=pub_date)
+	entryId = updateEntry(author_id=request.user.username, title=title, content=content, pub_date=pub_date)
 	return view(request, entryId)
 
 @login_required
