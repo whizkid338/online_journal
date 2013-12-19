@@ -78,6 +78,7 @@ def view(request, entryId=-1):
         entry.content = "You need to create an entry before you can view one"
     else:
         entry = getEntry(entryId)
+	entry.pub_date = entry.pub_date.strftime('%d %b %Y')
     # process username here from query
     return render_to_response('view.html', {'entry': entry}, RequestContext(request))
 
