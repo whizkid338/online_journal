@@ -1,0 +1,12 @@
+{% extends "login_base.html" %}
+
+{% block title %}OJ SignUp{% endblock %}
+
+{% block content %}
+
+<form action="/createUser/" method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

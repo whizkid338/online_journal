@@ -95,7 +95,6 @@ def updateEntry(author_id, entry_id = None, title = None, content = None, pub_da
 		_entry.content = content
 	if pub_date:
 		_entry.pub_date = pub_date
-	_entry.last_edit = timezone.now()
 	_entry.save()
 	return _entry.id
 
