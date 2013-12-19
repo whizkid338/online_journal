@@ -48,11 +48,15 @@
                           </a>
                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li>
+			      {% if not user.username %}
                               <form class="form-signin" role="form">
                                   <input type="text" class="form-control text-center" placeholder="Username"></input>
                                   <input type="text" class="form-control text-center" placeholder="Password"></input>
                                   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
                               </form>
+			      {% else %}
+			      	logout form
+			      {% endif %}
                             </li> 
                           </ul>
                       </li>
