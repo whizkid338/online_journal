@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}OJ View{% endblock %}
+
+{% block viewActive %}active{% endblock %}
+
+{% block mainBlock %}
+	<div class="row">
+            <div class="col-md-1">
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </button>
+            </div>
+            <div class="col-md-10">
+                <ul>
+                    <li>
+                        <p>This is a list of entries</p>
+                    </li>
+                    {% for entry in entries %}
+                    <li>
+                        <p>{{entry.title}}</p>
+                        <p>{{entry.content}}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            </div>
+        </div>
+        <br/>
+        <br/>
+{% endblock %}
+
+{% block footer %}
+<p class="text-muted">This is the VIEW page</p>
+{% endblock %}

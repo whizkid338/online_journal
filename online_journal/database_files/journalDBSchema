@@ -1,0 +1,28 @@
+
+
+create table Entries (
+  Id int AUTO_INCREMENT, 
+  UserId int, 
+  Date datetime, 
+  ModifiedDate datetime, 
+  Title text, 
+  EntryText longtext, 
+  PRIMARY KEY(Id)
+);
+
+create table Users (
+  Id int AUTO_INCREMENT, 
+  FirstName text, 
+  LastName text, 
+  Email text, 
+  Password varchar(64), 
+  AccountCreated datetime, 
+  PRIMARY KEY(Id), 
+  UNIQUE(Password)
+);
+
+create table Tags (
+  UserId int,
+  EntryId int,
+  TagName text
+); 
