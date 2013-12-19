@@ -64,11 +64,13 @@
 				   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
                               </form>
                               <form action="/signup_page">
-                                <button class="btn btn-primary btn-lg" type="submit">Register</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
                               </form>
 			      {% else %}
 			      <form action="logout" role="form" method="post">
-				<button class="btn btn-primary">Logout</button>
+						<div class="form-group">
+								<button class="btn btn-primary btn-lg btn-block">Logout</button>
+						</div>
 			      </form>
 			      {% endif %}
                             </li> 
