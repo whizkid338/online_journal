@@ -78,10 +78,18 @@ def submitEntry(request):
 	return render_to_response('view.html', form, entryId)
 
 def find(request):
-    username = "Sign in"
+    results = []
+    if request.method == "POST":
+        form = FindForm(request.POST)
+        if form.is_valid():
+            author = form.cleaned_data['author_id']
+            datestart = form.cleaned_data['datestart']
+            dateend = form.cleaned_data['dateend']
+            taglist = [form.cleaned_data['tag']]
+            results = entryFilter(author, datestart, dateend, taglist)
     # process username here from query
     # entrySearch(request.authorID)
-    return render_to_response('find.html', {'username': username}, RequestContext(request))
+    return render_to_response('find.html', {'results': results}, RequestContext(request))
 
 def login_page(request):
     form = AuthenticationForm
@@ -96,7 +104,7 @@ def authorize(request):
         if user.is_active:
             login(request, user)
             # return redirect('/internalURL/')
-            return redirect('/entry/')
+            return redirect('entry.html')
         else:
             return HttpResponse("You are in, but not active")
     else:
@@ -130,4 +138,4 @@ def createUser(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/entry/')
+    return redirect('entry.html')

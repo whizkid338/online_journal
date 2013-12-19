@@ -16,15 +16,15 @@
       changeYear: true
     });
   });
+
+  $(document).ready(function() {
+    $('.dropdown-toggle').dropdown();
+  });
   </script>
+
 </head>
 
 <body>
-  {% if user.is_authenticated %}
-    Welcome, {{user.username}}
-  {% else %}
-    Not logged in
-  {% endif %}
   <div id="wrap">
       <div class ="navbar navbar-default navbar-fixed-top" roles="navigation">
           <div class="container">
@@ -48,16 +48,16 @@
                   <ul class="nav navbar-nav navbar-right">
 		      <div class="dropdown">
 			  <li>
-			      <a id="dLabel" role="button" data-toggle="dropdown" data-target="#">{{ username }}<span class="caret"></span></a>
+			      <a id="dLabel" role="button" data-toggle="dropdown" data-target="#">{{ user.username }}<span class="caret"></span></a>
 			  </li>
 			  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 			      <li>
-				  <form class="form-signin" role="form>
+				  <form class="form-signin" role="form">
 				      <input type="text" class="form-control text-center" placeholder="Username"></input>
 				      <input type="text" class="form-control text-center" placeholder="Password"></input>
 				      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
-				  </form>
-     			      </li>
+				    </form>
+		      </li> 
 			  </ul>
 		      </div>
                   </ul>
