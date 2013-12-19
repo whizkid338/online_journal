@@ -59,11 +59,13 @@ def entry(request):
     # process username here from query
     return render_to_response('entry.html', {'username': username}, RequestContext(request))
 
+@login_required
 def view(request, entryId=-1):
     entry = getEntry(entryId)
     # process username here from query
     return render_to_response('view.html', {'entry': entry}, RequestContext(request))
 
+@login_required
 def prevEntry(request):
 	entryId = request.POST['entryId']
 	entries = entryFilter(author_id=1)
@@ -78,6 +80,7 @@ def prevEntry(request):
     # process username here from query
 	return view(request, entryId)
 
+@login_required
 def nextEntry(request):
 	entryId = request.POST['entryId']
 	entries = entryFilter(author_id=1)
@@ -89,6 +92,7 @@ def nextEntry(request):
 			return view(request, entryId)
 	return view(request, entryId)
 
+@login_required
 def submitEntry(request):
 	entryId = 0
 	title = "This is a temp"
@@ -104,6 +108,7 @@ def submitEntry(request):
 	entryId = updateEntry(author_id=1, title=title, content=content, pub_date=pub_date)
 	return view(request, entryId)
 
+@login_required
 def find(request):
     results = []
     tags = []
@@ -122,6 +127,9 @@ def find(request):
     return render_to_response('find.html', {'results': results, 'tags': tags, 'entries': entries}, RequestContext(request))
 
 def login_page(request):
+    if request.user.is_authenticated():
+        return redirect('/entry')
+
     form = AuthenticationForm
     return render(request, 'login_page.html', {'form':form,})
 
@@ -134,16 +142,17 @@ def authorize(request):
         if user.is_active:
             login(request, user)
             # return redirect('/internalURL/')
-            return redirect('entry.html')
+            return redirect('/entry')
         else:
             return HttpResponse("You are in, but not active")
     else:
         # Return an 'invalid login' error message.
         return HttpResponse("Bad username and password")
 
+
 def signup_page(request):
     form = UserCreationForm
-    return render(request, 'signup_page.html', {'form':form})
+    return render(request, 'signup_page2.html', {'form':form})
 
 def createUser(request):
     name = request.POST['name']
@@ -172,4 +181,4 @@ def createUser(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('entry.html')
+    return redirect('/entry')
