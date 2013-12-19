@@ -44,7 +44,11 @@
                   <ul class="nav navbar-nav navbar-right">
                       <li class="dropdown">
                           <a id="dLabel" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-                            {{ user.username }}<span class="caret"></span>
+							{% if not user.username %}
+								Sign In
+							{% endif %}
+                            {{ user.username }}
+							<span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li>
