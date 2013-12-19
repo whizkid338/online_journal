@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.dateparse import *
-from dateutil.parser import *
 from django.views.decorators.csrf import *
-import django.utils.timezone
 from online_journal_app.queries import *
 from django.http import HttpResponse
 
@@ -59,26 +57,25 @@ def entry(request):
     # process username here from query
     return render_to_response('entry.html', {'username': username}, RequestContext(request))
 
-def view(request, entryId=None):
+def view(request):
     username = "Sign in"
-    entry = getEntry(entryId)
+    entry = entryFilter()
     # process username here from query
     return render_to_response('view.html', {'username': username, 'entries': entry}, RequestContext(request))
 
 def submitEntry(request):
 	entryId = 0
-	title = "This is a temp"
-	pub_date = 12/12/12
-	content = "Temp content"
-	if 'title' in request.POST and request.POST['title']:
-			title = request.POST['title']
-	if 'date' in request.POST and request.POST['date']:
-			pub_date = request.POST['date']
-			pub_date = parse(pub_date)
-	if 'content' in request.POST and request.POST['content']:
-			content = request.POST['content']
-	entryId = updateEntry(author_id=1, title=title, content=content, pub_date=pub_date)
-	return view(request, entryId)
+	if request.method == "POST":
+		form = EntryForm(request.POST)
+		if form.is_valid():
+				title = form.cleaned_data['title']
+				pub_date = form.cleaned_data['pub_date']
+				pub_date = parse_datetime(pub_date)
+				content = form.cleaned_data['content']
+				entryId = updateEntry(author_id=1, title=title, content=content, pub_date=pub_date)
+	else:
+		form = EntryForm()
+	return render_to_response('view.html', form, entryId)
 
 def find(request):
     results = []
