@@ -33,8 +33,17 @@ def entryFilter(author_id = None, datestart = None, dateend = None, taglist = No
 
 '''entrySearch will search through the text relevant to each Entry and return a list of results
 sorted by relevance.'''
-def entrySearch(searchString, author_id = None):
-	results = [[e, 0] for e in Entry.objects.all()]
+def entrySearch( checkName = None ): #searchString, author_id = None):
+	#results = [[e, 0] for e in Entry.objects.all()]
+        if checkName:
+                #checkId = Author.objects.get(name=checkName)
+        	results = [Entry.objects.all()]
+	else:
+		results = []
+
+        # just for testing purposes
+        return results
+
 	if author_id:
 		_author = getAuthor(author_id)
 		if not _author:
