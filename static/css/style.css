@@ -77,6 +77,14 @@ hr {
     margin: 0 auto;
 }
 
+.col-entry-view {
+  background-color: #f5f5f5;
+}
+
+.col-entry-view h1, .col-entry-view p {
+	text-align: center;
+}
+
 /*
  * Style tweaks
  * --------------------------------------------------
