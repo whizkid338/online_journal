@@ -59,11 +59,35 @@ def entry(request):
     # process username here from query
     return render_to_response('entry.html', {'username': username}, RequestContext(request))
 
-def view(request, entryId=None):
-    username = "Sign in"
+def view(request, entryId=-1):
     entry = getEntry(entryId)
     # process username here from query
-    return render_to_response('view.html', {'username': username, 'entries': entry}, RequestContext(request))
+    return render_to_response('view.html', {'entry': entry}, RequestContext(request))
+
+def prevEntry(request):
+	entryId = request.POST['entryId']
+	entries = entryFilter(author_id=1)
+	for i in range(len(entries)):
+		if entries[i].id == long(entryId):
+			# only get previous entry if you aren't at the oldest already
+			index = 0
+			if i > 0:
+				index = i-1
+			entryId = entries[index].id
+			return view(request, entryId)
+    # process username here from query
+	return view(request, entryId)
+
+def nextEntry(request):
+	entryId = request.POST['entryId']
+	entries = entryFilter(author_id=1)
+	# we do not test the last entry, if it is the last we keep the last 
+	for i in range(len(entries)-1):
+		if entries[i].id == long(entryId):
+			index = i+1
+			entryId = entries[index].id
+			return view(request, entryId)
+	return view(request, entryId)
 
 def submitEntry(request):
 	entryId = 0
