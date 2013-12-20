@@ -37,8 +37,7 @@
                         <h2>{{ j.title }}</h2>
                         <p>{{ j.content }}</p>
                         <p>
-                            <a class="btn btn-default" href="#" role="button">Edit</a>
-                            <a class="btn btn-default" href="#" role="button">View</a>
+
                         </p>
                     </div>
                  {% endfor %}
