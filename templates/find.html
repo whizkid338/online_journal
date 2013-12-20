@@ -7,11 +7,16 @@
 {% block mainBlock %}
         <div class="row">
             <div class="col-xs-12">
-                <input type="text" class="form-control text-center" placeholder="Search for keyword, title, group, or tag here">
                 {% autoescape on %}{{ find }}{% endautoescape %}
-                </input>
+                        <div>
+                        	<p class="text-center">Find an entry</p>
+                        </div>
+			<form action="/find/" method="post">
+				{{ form }}
+                        <button class="btn btn-lg btn-primary btn-block" value="Submit" type="submit">Search</button>
+			</form>
+
             </div>
-	    <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
         </div>
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
