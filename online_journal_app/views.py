@@ -194,7 +194,11 @@ def createUser(request):
 
     updateAuthor(None, username, name)
     
-    return redirect("entry.html")
+    authenticatedUser = authenticate(username=username, password=password1)
+
+    login(request, authenticatedUser)
+
+    return redirect("/entry")
 #    return HttpResponse("Congrats %s, you are now in our database" % username)
 
 def logout_view(request):
