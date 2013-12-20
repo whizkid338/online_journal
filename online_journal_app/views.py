@@ -150,7 +150,7 @@ def find(request):
 
 def login_page(request):
     if request.user.is_authenticated():
-        return redirect('/entry')
+        return redirect('entry')
 
     form = AuthenticationForm
     return render(request, 'login_page.html', {'form':form,})
@@ -164,7 +164,7 @@ def authorize(request):
         if user.is_active:
             login(request, user)
             # return redirect('/internalURL/')
-            return redirect('/entry')
+            return redirect('entry')
         else:
             return HttpResponse("You are in, but not active")
     else:
@@ -189,8 +189,8 @@ def createUser(request):
     # check to see if username already exists
     try:
         user = User.objects.create_user(username)
-    except:
-        return HttpResponse("Sorry, that username already exists")
+    except Exception as e:
+        return HttpResponse("Sorry, that username already exists\n" + str(e))
 
     # user is created...just need to set the password
     user.set_password(password1)
@@ -202,9 +202,9 @@ def createUser(request):
 
     login(request, authenticatedUser)
 
-    return redirect("/entry")
+    return redirect("entry")
 #    return HttpResponse("Congrats %s, you are now in our database" % username)
 
 def logout_view(request):
     logout(request)
-    return redirect('/entry')
+    return redirect('entry')
