@@ -47,7 +47,8 @@ def entrySearch( author = None ): #searchString, author_id = None):
         if author:
                 #checkId = Author.objects.get(name=checkName)
         	# results = [Entry.objects.all()]
-                authId = Author.objects.filter(auth_identifier = author)[0].id
+		list = Author.objects.filter(auth_identifier=author)
+                authId = list[0].id
   		results = [Entry.objects.filter(author_id=authId)]
 	else:
 		results = []

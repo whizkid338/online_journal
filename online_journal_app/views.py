@@ -188,12 +188,14 @@ def createUser(request):
         return HttpResponse("Your two passwords were not the same")
 
     # check to see if username already exists
-    try:
-        user = User.objects.create_user(username)
-    except Exception as e:
-        return HttpResponse("Sorry, that username already exists\n" + str(e))
+#    try:
+    user, created  = User.objects.get_or_create(username=username)
+#    except Exception as e:
+    if not created:
+	return HttpResponse("Sorry, that username already exists\n")
 
     # user is created...just need to set the password
+    
     user.set_password(password1)
     user.save()
 
@@ -203,9 +205,9 @@ def createUser(request):
 
     login(request, authenticatedUser)
 
-    return redirect("entry")
+    return redirect("/online_journal/entry")
 #    return HttpResponse("Congrats %s, you are now in our database" % username)
 
 def logout_view(request):
     logout(request)
-    return redirect('entry')
+    return redirect('/online_journal/entry')
