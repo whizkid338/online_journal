@@ -7,9 +7,16 @@
 {% block mainBlock %}
         <div class="row">
             <div class="col-xs-12">
-                <input type="text" class="form-control text-center" placeholder="Search for keyword, title, group, or tag here"></input>
+                {% autoescape on %}{{ find }}{% endautoescape %}
+                        <div>
+                        	<p class="text-center">Find an entry</p>
+                        </div>
+			<form action="/find/" method="post">
+				{{ form }}
+                        <button class="btn btn-lg btn-primary btn-block" value="Submit" type="submit">Search</button>
+			</form>
+
             </div>
-	    <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
         </div>
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
@@ -17,40 +24,25 @@
                     <input type="text" class="form-control text-center" id="datepicker" placeholder="Date">
                     </input>
                     <br/>Tags:
-                    <a class="list-group-item">Tag A</a>
-                    <a class="list-group-item">Tag B</a>
-                    <a class="list-group-item">Tag C</a>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-9">
                 <div class="row">
+                {% if entries %}
+                {% for i in entries %}
+                {% for j in i %}
                     <div class="col-6 col-sm-6 col-lg-4">
-                        <h2>Title of Result 1</h2>
-                        <p>Tags of Result 1</p>
-                        <p>Date of Result 1</p>
+                        <h2>{{ j.title }}</h2>
+                        <p>{{ j.content }}</p>
+                        <p>No Tags</p>
                         <p>
                             <a class="btn btn-default" href="#" role="button">Edit</a>
                             <a class="btn btn-default" href="#" role="button">View</a>
                         </p>
                     </div>
-                    <div class="col-6 col-sm-6 col-lg-4">
-                        <h2>Title of Result 2</h2>
-                        <p>Tags of Result 2</p>
-                        <p>Date of Result 2</p>
-                        <p>
-                            <a class="btn btn-default" href="#" role="button">Edit</a>
-                            <a class="btn btn-default" href="#" role="button">View</a>
-                        </p>
-                    </div>
-                    <div class="col-6 col-sm-6 col-lg-4">
-                        <h2>Title of Result 3</h2>
-                        <p>Tags of Result 3</p>
-                        <p>Date of Result 3</p>
-                        <p>
-                            <a class="btn btn-default" href="#" role="button">Edit</a>
-                            <a class="btn btn-default" href="#" role="button">View</a>
-                        </p>
-                    </div>
+                 {% endfor %}
+                 {% endfor %}
+                 {% endif %}
                 </div>
             </div>
         </div>
@@ -58,6 +50,3 @@
         <br/>
 {% endblock %}
 
-{% block footer %}
-<p class="text-muted">This is the FIND page</p>
-{% endblock %}

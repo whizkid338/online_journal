@@ -27,6 +27,8 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'login/'
+
 
 # Application definition
 
@@ -40,12 +42,12 @@ INSTALLED_APPS = (
     'online_journal_app',
     'markdown_deux',
     'online_journal',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -83,17 +85,36 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATIC_URL = '/online_journal/static/'
-# STATICFILES_DIRS = (
-# 	os.path.join(BASE_DIR, 'static'),
-#)
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = 'online_journal/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 
 # Template Location
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, "templates") 
+    os.path.join(BASE_DIR, "templates"),
 )
+
+REST_FRAMEWORK = {
+    # Use hyperlinked styles by default.
+    # Only used if the `serializer_class` attribute is not set on a view.
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    #'DEFAULT_PERMISSION_CLASSES': [
+    #   'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    #]
+
+   'DEFAULT_PERMISSION_CLASSES': (
+   'rest_framework.permissions.AllowAny',
+    ),
+
+    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+}

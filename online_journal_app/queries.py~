@@ -42,7 +42,7 @@ def latestEntry(username):
 
 '''entrySearch will search through the text relevant to each Entry and return a list of results
 sorted by relevance.'''
-def entrySearch( author = None ): #searchString, author_id = None):
+def entrySearch( checkName = None ): #searchString, author_id = None):
 	#results = [[e, 0] for e in Entry.objects.all()]
         if author:
                 #checkId = Author.objects.get(name=checkName)
