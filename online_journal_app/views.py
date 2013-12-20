@@ -165,7 +165,7 @@ def authorize(request):
         if user.is_active:
             login(request, user)
             # return redirect('/internalURL/')
-            return redirect('entry')
+            return redirect('/online_journal/entry')
         else:
             return HttpResponse("You are in, but not active")
     else:
