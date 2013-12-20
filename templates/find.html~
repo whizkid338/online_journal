@@ -36,7 +36,8 @@
                     <div class="col-6 col-sm-6 col-lg-4">
                         <h2>{{ j.title }}</h2>
                         <p>{{ j.content }}</p>
-                        <p>{{ j.pub_date }}
+                        <p>
+
                         </p>
                     </div>
                  {% endfor %}
